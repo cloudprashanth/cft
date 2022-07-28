@@ -1,4 +1,3 @@
-
 Description: Provisions a Lambda Error alarm
 Resources:
   LambdaErrorAlarm:
@@ -19,3 +18,15 @@ Resources:
       Threshold: 1
       OKActions:
         - !Sub 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:Alert'
+  ThrottlesAlarm:
+    Type: "AWS::CloudWatch::Alarm"
+    Properties:
+      AlarmName: "LambdaThrottlesAlarm"
+      AlarmDescription: "Trigger an alarm if a throttle is recorded"
+      MetricName: "Throttles"
+      Namespace: "AWS/Lambda"
+      Statistic: "Sum"
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 0
+      ComparisonOperator: "GreaterThanThreshold"
