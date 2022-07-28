@@ -1,16 +1,14 @@
 
 Description: Provisions a Lambda Error alarm
-
 Resources:
-
-  LambdaCriticalErrorAlarm:
+  LambdaErrorAlarm:
     Type: 'AWS::CloudWatch::Alarm'
     Properties:
       ActionsEnabled: true
-      AlarmDescription: 'Error Alarm for Lambdas'
-      AlarmName: 'Lambda Error Alarm'
+      AlarmDescription: Error Alarm for Lambdas
+      AlarmName: Lambda Error Alarm
       AlarmActions:
-        - arn:aws:sns:us-east-1:042309865848:Alert
+        - !Sub 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:Alert'
       ComparisonOperator: GreaterThanOrEqualToThreshold
       DatapointsToAlarm: 1
       MetricName: Errors
@@ -20,6 +18,4 @@ Resources:
       EvaluationPeriods: 1
       Threshold: 1
       OKActions:
-        - arn:aws:sns:us-east-1:042309865848:Alert
-
-
+        - !Sub 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:Alert'

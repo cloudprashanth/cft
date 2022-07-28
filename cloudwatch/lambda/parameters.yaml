@@ -1,0 +1,3 @@
+---
+- ParameterKey: AlarmTopic
+  ParameterValue: arn:aws:sns:us-east-1:042309865848:Alert
